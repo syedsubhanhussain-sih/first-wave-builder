@@ -8,50 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Cybersecurity theme colors */
+    --background: 0 0% 94.5%; /* Light gray F0F0F0 */
     --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* Pure white */
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 195 100% 47%; /* Neon blue #00AEEF */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 0 0% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 0 0% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 120 100% 50%; /* Bright green #00FF00 */
+    --accent-foreground: 0 0% 0%;
+
+    --success: 120 100% 50%; /* Bright green */
+    --success-foreground: 0 0% 0%;
+
+    --warning: 39 100% 50%; /* Orange warning */
+    --warning-foreground: 0 0% 0%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 195 100% 47%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Glassmorphism colors */
+    --glass-bg: 0 0% 100% / 0.1;
+    --glass-border: 0 0% 100% / 0.2;
+    
+    /* Gradient colors */
+    --gradient-cyber: linear-gradient(135deg, hsl(195 100% 47% / 0.1), hsl(120 100% 50% / 0.1));
+    --gradient-scan: linear-gradient(90deg, hsl(195 100% 47%), hsl(120 100% 50%));
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -65,8 +73,8 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 195 100% 47%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -74,15 +82,28 @@ All colors MUST be HSL.
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 120 100% 50%;
+    --accent-foreground: 0 0% 0%;
+
+    --success: 120 100% 50%;
+    --success-foreground: 0 0% 0%;
+
+    --warning: 39 100% 50%;
+    --warning-foreground: 0 0% 0%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 195 100% 47%;
+
+    --glass-bg: 0 0% 0% / 0.1;
+    --glass-border: 0 0% 100% / 0.1;
+
+    --gradient-cyber: linear-gradient(135deg, hsl(195 100% 47% / 0.2), hsl(120 100% 50% / 0.2));
+    --gradient-scan: linear-gradient(90deg, hsl(195 100% 47%), hsl(120 100% 50%));
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -101,5 +122,65 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Glassmorphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Cybersecurity themed gradients */
+  .gradient-cyber {
+    background: var(--gradient-cyber);
+  }
+
+  .gradient-scan {
+    background: var(--gradient-scan);
+  }
+
+  /* Tool button animations */
+  .tool-button-idle {
+    @apply bg-card border-2 border-border text-foreground transition-all duration-300;
+  }
+
+  .tool-button-scanning {
+    @apply bg-primary text-primary-foreground border-2 border-primary;
+    animation: pulse 2s infinite;
+  }
+
+  .tool-button-complete {
+    @apply bg-accent text-accent-foreground border-2 border-accent;
+  }
+
+  /* Custom animations */
+  @keyframes gear-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .gear-animation {
+    animation: gear-rotate 2s linear infinite;
+  }
+
+  @keyframes scan-progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  .scan-progress {
+    animation: scan-progress 1s ease-out forwards;
+  }
+
+  /* Neon glow effects */
+  .neon-glow {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .success-glow {
+    box-shadow: 0 0 20px hsl(var(--accent) / 0.5);
   }
 }
